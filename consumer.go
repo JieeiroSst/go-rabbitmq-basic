@@ -26,11 +26,11 @@ func main(){
 	if err!=nil {
 		panic(err)
 	}
-	forver:=make(chan bool)
+	forever :=make(chan bool)
 	go func() {
 		for d:=range msgs {
 			fmt.Printf("message %s \n",d.Body)
 		}
 	}()
-	<-forver
+	<-forever
 }

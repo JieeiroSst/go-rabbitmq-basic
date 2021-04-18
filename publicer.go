@@ -13,13 +13,11 @@ func main(){
 	}
 	defer conn.Close()
 	fmt.Println("Successfully connected to our rabbitmq instance")
-
 	ch,err:=conn.Channel()
 	if err!=nil {
 		panic(err)
 	}
 	defer ch.Close()
-
 	q,err:=ch.QueueDeclare(
 		"Queue",
 		false,
@@ -32,10 +30,9 @@ func main(){
 		panic(err)
 	}
 	fmt.Println(q)
-
 	err=ch.Publish(
 		"",
-		"Queue",
+		q.Name,
 		false,
 		false,
 		amqp.Publishing{
